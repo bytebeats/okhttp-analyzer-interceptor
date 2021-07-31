@@ -8,3 +8,4 @@ dependencyResolutionManagement {
 }
 rootProject.name = "OkHttpAnalyzor"
 include ':app'
+include ':analyzor'

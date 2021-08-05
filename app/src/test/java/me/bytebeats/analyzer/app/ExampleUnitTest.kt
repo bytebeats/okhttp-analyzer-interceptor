@@ -1,4 +1,4 @@
-package me.bytebeats.analysor.app
+package me.bytebeats.analyzer.app
 
 import org.junit.Test
 

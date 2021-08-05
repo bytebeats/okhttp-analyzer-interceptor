@@ -1,6 +1,6 @@
-package me.bytebeats.analysor
+package me.bytebeats.analyzer
 
-import me.bytebeats.analysor.transfer.LogDataTransfer
+import me.bytebeats.analyzer.transfer.LogDataTransfer
 import okhttp3.Interceptor
 import okhttp3.Response
 import java.text.SimpleDateFormat
@@ -16,7 +16,7 @@ import java.util.concurrent.atomic.AtomicLong
 /**
  * An OkHttp Interceptor to intercept requests and responses
  */
-class OkHttpAnalyzorInterceptor : Interceptor {
+class OkHttpAnalyzerInterceptor : Interceptor {
     private val mDataTransfer by lazy { LogDataTransfer() }
     private val mPreTime by lazy { AtomicLong() }
     private val mDateFormat by lazy { SimpleDateFormat("ddhhmmssSSS", Locale.US) }

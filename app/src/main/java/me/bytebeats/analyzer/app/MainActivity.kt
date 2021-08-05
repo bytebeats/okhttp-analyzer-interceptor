@@ -1,4 +1,4 @@
-package me.bytebeats.analysor.app
+package me.bytebeats.analyzer.app
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -15,10 +15,10 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
-import me.bytebeats.analysor.BuildConfig
-import me.bytebeats.analysor.OkHttpAnalyzorInterceptor
-import me.bytebeats.analysor.app.MainActivity.Companion.JSON_URL
-import me.bytebeats.analysor.app.ui.theme.OkHttpAnalyzorTheme
+import me.bytebeats.analyzer.BuildConfig
+import me.bytebeats.analyzer.OkHttpAnalyzerInterceptor
+import me.bytebeats.analyzer.app.MainActivity.Companion.JSON_URL
+import me.bytebeats.analyzer.app.ui.theme.OkHttpAnalyzorTheme
 import okhttp3.*
 import retrofit2.Retrofit
 import java.io.IOException
@@ -46,7 +46,7 @@ class MainActivity : ComponentActivity() {
         //OkHttp Initialization
         val builder = OkHttpClient.Builder()
         if (BuildConfig.DEBUG) {
-            builder.addInterceptor(OkHttpAnalyzorInterceptor())
+            builder.addInterceptor(OkHttpAnalyzerInterceptor())
         }
         mClient = builder.build()
         sendRequest()

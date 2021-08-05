@@ -1,4 +1,4 @@
-package me.bytebeats.analysor.app.ui.theme
+package me.bytebeats.analyzer.app.ui.theme
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material.MaterialTheme

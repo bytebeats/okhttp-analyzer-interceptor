@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="me.bytebeats.analysor.app">
+    package="me.bytebeats.analyzer.app">
 
     <application
         android:allowBackup="true"
@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.OkHttpAnalyzor">
         <activity
-            android:name=".MainActivity"
+            android:name="me.bytebeats.analyzer.app.MainActivity"
             android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/Theme.OkHttpAnalyzor.NoActionBar">

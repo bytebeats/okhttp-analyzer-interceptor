@@ -1,4 +1,4 @@
-package me.bytebeats.analysor
+package me.bytebeats.analyzer
 
 /**
  * Created by bytebeats on 2021/7/31 : 20:42

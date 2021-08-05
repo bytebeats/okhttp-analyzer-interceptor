@@ -1,4 +1,4 @@
-package me.bytebeats.analysor.transfer
+package me.bytebeats.analyzer.transfer
 
 import okhttp3.Request
 import okhttp3.Response
@@ -25,7 +25,7 @@ interface IDataTransfer {
         const val LOG_LENGTH = 4000
         internal const val SLOW_DOWN_PARTS_AFTER = 20
         internal const val BODY_BUFFER_SIZE = 1024L * 1024L * 10L
-        internal const val LOG_PREFIX = "OkHttpAnalyzor"
+        internal const val LOG_PREFIX = "OkHttpAnalyzer"
         internal const val DELIMITER = "_"
         internal const val HEADER_DELIMITER = ':'
         internal const val SPACE = ' '

@@ -1,10 +1,10 @@
-package me.bytebeats.analysor.transfer
+package me.bytebeats.analyzer.transfer
 
 import android.os.Bundle
 import android.os.HandlerThread
 import android.os.Process
 import android.util.Log
-import me.bytebeats.analysor.MessageType
+import me.bytebeats.analyzer.MessageType
 import okhttp3.Request
 import okhttp3.Response
 import okio.Buffer

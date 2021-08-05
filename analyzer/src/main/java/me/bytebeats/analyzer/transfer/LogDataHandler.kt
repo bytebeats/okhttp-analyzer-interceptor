@@ -1,4 +1,4 @@
-package me.bytebeats.analysor.transfer
+package me.bytebeats.analyzer.transfer
 
 import android.os.Handler
 import android.os.Looper

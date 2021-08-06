@@ -11,7 +11,7 @@ import kotlin.jvm.Throws
  * Quote: Peasant. Educated. Worker
  */
 interface IDataTransfer {
-    @kotlin.jvm.Throws(IOException::class)
+    @Throws(IOException::class)
     fun transferRequest(id: String, request: Request)
 
     @Throws(IOException::class)

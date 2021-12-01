@@ -6,6 +6,7 @@ import me.bytebeats.analyzer.app.util.JSON_URL
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
+import retrofit2.converter.moshi.MoshiConverterFactory
 
 /**
  * Created by bytebeats on 2021/12/1 : 10:45
@@ -24,7 +25,7 @@ object RetrofitService {
                     })
                     .build()
             )
-//            .addConverterFactory(MoshiConverterFactory.create())
+            .addConverterFactory(MoshiConverterFactory.create())
             .build()
 
     val apiService: ApiService = createRetrofit(JSON_URL).create(ApiService::class.java)

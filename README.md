@@ -19,6 +19,47 @@ An intellij platform plugin. To analyze details of requests and responses from O
 * [Moshi](https://github.com/square/moshi) - Modern JSON library for Android, Java and Kotlin. It makes it easy to parse JSON into Java and Kotlin classes.
 * [Jetpack Components](https://developer.android.com/jetpack) - Compose, ViewModel and more.
 
+## How to use
+
+##### For OkHttp
+###### Java
+    OkHttpClient.Builder builder = new OkHttpClient.Builder();
+     if (BuildConfig.DEBUG) {
+         builder.addInterceptor(new OkHttpAnalyzerInterceptor());
+     }   
+    OkHttpClient client = builder.build(); 
+
+###### Kotlin
+    val builder = OkHttpClient.Builder()
+    if (BuildConfig.DEBUG) {
+        builder.addInterceptor(OkHttpAnalyzerInterceptor() )
+    }    
+    val client = builder.build()
+
+##### For Retrofit
+###### Java
+    OkHttpClient.Builder builder = new OkHttpClient.Builder();
+     if (BuildConfig.DEBUG) {
+         builder.addInterceptor(new OkHttpAnalyzerInterceptor());
+     }   
+    OkHttpClient client = builder.build(); 
+    Retrofit retrofit = new Retrofit.Builder()
+                ......
+                .client(client)
+                .build();
+
+
+###### Kotlin
+    val builder = OkHttpClient.Builder()
+    if (BuildConfig.DEBUG) {
+        builder.addInterceptor( OkHttpAnalyzerInterceptor() )
+    }    
+    val client = builder.build()
+    val retrofit = Retrofit.Builder()
+            ......
+            .client(client)
+            .build()
+
 ## Stargazers over time
 
 [![Stargazers over time](https://starchart.cc/bytebeats/OkHttpAnalyzer.svg)](https://starchart.cc/bytebeats/OkHttpAnalyzer)

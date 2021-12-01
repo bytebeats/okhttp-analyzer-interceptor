@@ -3,34 +3,45 @@ package me.bytebeats.analyzer.app
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.text.ClickableText
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.material.Button
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.SpanStyle
-import androidx.compose.ui.text.buildAnnotatedString
-import androidx.compose.ui.text.font.FontFamily
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.withStyle
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.sp
-import me.bytebeats.analyzer.BuildConfig
-import me.bytebeats.analyzer.OkHttpAnalyzerInterceptor
-import me.bytebeats.analyzer.app.MainActivity.Companion.JSON_URL
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.lifecycle.ViewModelProvider
+import me.bytebeats.analyzer.app.intent.MainIntent
+import me.bytebeats.analyzer.app.mapper.impl.ApiColorMapperImpl
+import me.bytebeats.analyzer.app.repository.impl.ApiRepositoryImpl
+import me.bytebeats.analyzer.app.retrofit.RetrofitService
+import me.bytebeats.analyzer.app.source.ApiRemoteDataSource
+import me.bytebeats.analyzer.app.state.MainUiState
 import me.bytebeats.analyzer.app.ui.theme.OkHttpAnalyzorTheme
-import okhttp3.*
-import retrofit2.Retrofit
-import java.io.IOException
+import me.bytebeats.analyzer.app.usercase.impl.ApiUserCaseImpl
+import me.bytebeats.analyzer.app.viewmodel.ApiViewModel
+import me.bytebeats.analyzer.app.viewmodel.factory.ApiViewModelFactory
 
 
 class MainActivity : ComponentActivity() {
-    companion object {
-        val JSON_URL =
-            "https://raw.githubusercontent.com/itkacher/OkHttpProfiler/master/colors.json"
-        var mClient: OkHttpClient? = null
-    }
 
+    private val apiViewModel by lazy {
+        ViewModelProvider(
+            this, ApiViewModelFactory(
+                ApiUserCaseImpl(
+                    ApiColorMapperImpl(), ApiRepositoryImpl(
+                        ApiRemoteDataSource(RetrofitService.apiService)
+                    )
+                )
+            )
+        )[ApiViewModel::class.java]
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,70 +49,46 @@ class MainActivity : ComponentActivity() {
             OkHttpAnalyzorTheme {
                 // A surface container using the 'background' color from the theme
                 Surface(color = MaterialTheme.colors.background) {
-                    Greeting("Android")
+                    Greeting(apiViewModel)
                 }
             }
         }
 
-        //OkHttp Initialization
-        val builder = OkHttpClient.Builder()
-        if (BuildConfig.DEBUG) {
-            builder.addInterceptor(OkHttpAnalyzerInterceptor())
-        }
-        mClient = builder.build()
-        sendRequest()
-
-        //Retrofit Initialization (if needed)
-
-        //Retrofit Initialization (if needed)
-        val retrofit = Retrofit.Builder()
-            .client(mClient!!)
-            .build()
     }
 }
 
-private fun sendRequest() {
-    val request: Request = Request.Builder()
-        .url(JSON_URL)
-        .get()
-        .build()
-
-    MainActivity.mClient?.newCall(request)?.enqueue(object : Callback {
-        override fun onFailure(call: Call, e: IOException) {}
-        override fun onResponse(call: Call, response: Response) {
-            try {
-                if (response.body != null) {
-                    val unusedText: String = response.body?.string() ?: ""
-                }
-            } catch (e: IOException) {
-                e.printStackTrace()
+@Composable
+fun Greeting(viewModel: ApiViewModel) {
+    val uiState by remember(viewModel) {
+        viewModel.state
+    }.collectAsState(initial = MainUiState.Idle)
+    Column(
+        modifier = Modifier.fillMaxWidth(),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Top
+    ) {
+        Button(onClick = { viewModel.sendIntent(MainIntent.GetColors) }) {
+            Text(text = "Get Colors")
+        }
+        when (uiState) {
+            is MainUiState.Idle -> {
+                Text(text = "Idel")
+            }
+            is MainUiState.Loading -> {
+                Text(text = "Loading")
+            }
+            is MainUiState.Colors -> {
+                Text(
+                    text = (uiState as MainUiState.Colors).data.keys.joinToString(
+                        separator = ",",
+                        prefix = "[",
+                        postfix = "]"
+                    )
+                )
+            }
+            is MainUiState.Error -> {
+                Text(text = (uiState as MainUiState.Error).t?.stackTraceToString().orEmpty())
             }
         }
-    })
-}
-
-@Composable
-fun Greeting(name: String) {
-    val annotatedText = buildAnnotatedString {
-        withStyle(
-            style = SpanStyle(
-                color = Color.Red,
-                fontSize = 30.sp,
-                fontWeight = FontWeight.Bold,
-                fontFamily = FontFamily.Monospace,
-                background = Color.LightGray,
-            )
-        ) {
-            append("Hello $name!")
-        }
-    }
-    ClickableText(text = annotatedText, onClick = { sendRequest() })
-}
-
-@Preview(showBackground = true)
-@Composable
-fun DefaultPreview() {
-    OkHttpAnalyzorTheme {
-        Greeting("Android")
     }
 }

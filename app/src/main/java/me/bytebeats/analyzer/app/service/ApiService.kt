@@ -9,5 +9,5 @@ import retrofit2.http.GET
  */
 interface ApiService {
     @GET("/itkacher/OkHttpProfiler/master/colors.json")
-    suspend fun getColors(): Map<String, IntArray>
+    suspend fun getColors(): Map<String, LongArray>
 }

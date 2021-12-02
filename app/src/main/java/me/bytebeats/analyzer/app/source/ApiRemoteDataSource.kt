@@ -8,5 +8,5 @@ import me.bytebeats.analyzer.app.service.ApiService
  * Quote: Peasant. Educated. Worker
  */
 class ApiRemoteDataSource(private val apiService: ApiService) {
-    suspend fun getColors(): Map<String, IntArray> = apiService.getColors()
+    suspend fun getColors(): Map<String, LongArray> = apiService.getColors()
 }

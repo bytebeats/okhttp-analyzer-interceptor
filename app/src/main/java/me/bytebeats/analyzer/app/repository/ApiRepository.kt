@@ -6,5 +6,5 @@ package me.bytebeats.analyzer.app.repository
  * Quote: Peasant. Educated. Worker
  */
 interface ApiRepository {
-    suspend fun getColors(): Map<String, IntArray>
+    suspend fun getColors(): Map<String, LongArray>
 }

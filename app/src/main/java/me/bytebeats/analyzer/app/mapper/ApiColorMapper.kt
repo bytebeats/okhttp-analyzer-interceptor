@@ -6,5 +6,5 @@ package me.bytebeats.analyzer.app.mapper
  * Quote: Peasant. Educated. Worker
  */
 interface ApiColorMapper {
-    fun map(data: Map<String, IntArray>): Map<String, Int>
+    fun map(data: Map<String, LongArray>): Map<String, Long>
 }

@@ -13,5 +13,5 @@ class ApiUserCaseImpl(
     private val mapper: ApiColorMapper,
     private val apiRepository: ApiRepository
 ) : ApiUserCase {
-    override suspend fun getKeys(): Map<String, Int> = mapper.map(apiRepository.getColors())
+    override suspend fun getKeys(): Map<String, Long> = mapper.map(apiRepository.getColors())
 }

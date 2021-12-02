@@ -6,5 +6,5 @@ package me.bytebeats.analyzer.app.usercase
  * Quote: Peasant. Educated. Worker
  */
 interface ApiUserCase {
-    suspend fun getKeys(): Map<String, Int>
+    suspend fun getKeys(): Map<String, Long>
 }

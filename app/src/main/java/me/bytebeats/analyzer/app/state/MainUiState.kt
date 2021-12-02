@@ -8,6 +8,6 @@ package me.bytebeats.analyzer.app.state
 sealed class MainUiState {
     object Idle : MainUiState()
     object Loading : MainUiState()
-    data class Colors(val data: Map<String, Int>) : MainUiState()
+    data class Colors(val data: Map<String, Long>) : MainUiState()
     data class Error(val t: Throwable?) : MainUiState()
 }

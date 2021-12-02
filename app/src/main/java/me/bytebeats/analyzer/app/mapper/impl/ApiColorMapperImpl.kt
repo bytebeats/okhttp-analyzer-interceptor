@@ -9,6 +9,6 @@ import me.bytebeats.analyzer.app.util.convertARGB2Int
  * Quote: Peasant. Educated. Worker
  */
 class ApiColorMapperImpl : ApiColorMapper {
-    override fun map(data: Map<String, IntArray>): Map<String, Int> =
+    override fun map(data: Map<String, LongArray>): Map<String, Long> =
         data.mapValues { entry -> convertARGB2Int(entry.value) }
 }

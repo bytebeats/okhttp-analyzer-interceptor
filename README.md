@@ -23,21 +23,26 @@ An intellij platform plugin. To analyze details of requests and responses from O
 
 ##### For OkHttp
 ###### Java
+```
     OkHttpClient.Builder builder = new OkHttpClient.Builder();
      if (BuildConfig.DEBUG) {
          builder.addInterceptor(new OkHttpAnalyzerInterceptor());
      }   
-    OkHttpClient client = builder.build(); 
+    OkHttpClient client = builder.build();
+``` 
 
 ###### Kotlin
+```
     val builder = OkHttpClient.Builder()
     if (BuildConfig.DEBUG) {
         builder.addInterceptor(OkHttpAnalyzerInterceptor() )
     }    
     val client = builder.build()
+```
 
 ##### For Retrofit
 ###### Java
+```
     OkHttpClient.Builder builder = new OkHttpClient.Builder();
      if (BuildConfig.DEBUG) {
          builder.addInterceptor(new OkHttpAnalyzerInterceptor());
@@ -47,9 +52,11 @@ An intellij platform plugin. To analyze details of requests and responses from O
                 ......
                 .client(client)
                 .build();
+```
 
 
 ###### Kotlin
+```
     val builder = OkHttpClient.Builder()
     if (BuildConfig.DEBUG) {
         builder.addInterceptor( OkHttpAnalyzerInterceptor() )
@@ -59,6 +66,7 @@ An intellij platform plugin. To analyze details of requests and responses from O
             ......
             .client(client)
             .build()
+```
 
 ## Stargazers over time
 

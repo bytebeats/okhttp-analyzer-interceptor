@@ -10,7 +10,6 @@ import okhttp3.Response
 import okio.Buffer
 import java.io.IOException
 import java.nio.charset.Charset
-import kotlin.jvm.Throws
 
 /**
  * Created by bytebeats on 2021/7/31 : 21:06
@@ -117,7 +116,7 @@ class LogDataTransfer : IDataTransfer {
     private fun logWithHandler(id: String, type: MessageType, message: String?, parts: Int) {
         if (!::mLogHandler.isInitialized) return
         val msg = mLogHandler.obtainMessage()
-        val data = Bundle.EMPTY
+        val data = Bundle()
         data.putString(IDataTransfer.KEY_TAG, logTag(id, type))
         data.putString(IDataTransfer.KEY_VALUE, message)
         data.putInt(IDataTransfer.KEY_PARTS_COUNT, parts)

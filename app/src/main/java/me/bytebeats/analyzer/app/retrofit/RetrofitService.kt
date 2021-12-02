@@ -1,5 +1,6 @@
 package me.bytebeats.analyzer.app.retrofit
 
+import com.squareup.moshi.Moshi
 import me.bytebeats.analyzer.OkHttpAnalyzerInterceptor
 import me.bytebeats.analyzer.app.service.ApiService
 import me.bytebeats.analyzer.app.util.JSON_URL
@@ -25,7 +26,7 @@ object RetrofitService {
                     })
                     .build()
             )
-            .addConverterFactory(MoshiConverterFactory.create())
+            .addConverterFactory(MoshiConverterFactory.create(Moshi.Builder().build()))
             .build()
 
     val apiService: ApiService = createRetrofit(JSON_URL).create(ApiService::class.java)

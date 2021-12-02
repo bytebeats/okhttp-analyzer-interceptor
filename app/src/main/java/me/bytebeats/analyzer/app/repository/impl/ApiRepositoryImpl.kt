@@ -11,7 +11,7 @@ import me.bytebeats.analyzer.app.source.ApiRemoteDataSource
  * Quote: Peasant. Educated. Worker
  */
 class ApiRepositoryImpl(private val apiRemoteDataSource: ApiRemoteDataSource) : ApiRepository {
-    override suspend fun getColors(): HashMap<String, IntArray> = withContext(Dispatchers.IO) {
+    override suspend fun getColors(): Map<String, IntArray> = withContext(Dispatchers.IO) {
         apiRemoteDataSource.getColors()
     }
 }

@@ -1,16 +1,16 @@
-# OkHttpAnalyzer
+# okhttp-analyzer-interceptor
 
-[![GitHub latest commit](https://badgen.net/github/last-commit/bytebeats/OkHttpAnalyzer)](https://github.com/bytebeats/OkHttpAnalyzer/commit/)
-[![GitHub contributors](https://img.shields.io/github/contributors/bytebeats/OkHttpAnalyzer.svg)](https://github.com/bytebeats/OkHttpAnalyzer/graphs/contributors/)
-[![GitHub issues](https://img.shields.io/github/issues/bytebeats/OkHttpAnalyzer.svg)](https://github.com/bytebeats/OkHttpAnalyzer/issues/)
-[![Open Source? Yes!](https://badgen.net/badge/Open%20Source%20%3F/Yes%21/blue?icon=github)](https://github.com/bytebeats/OkHttpAnalyzer/)
-[![GitHub forks](https://img.shields.io/github/forks/bytebeats/OkHttpAnalyzer.svg?style=social&label=Fork&maxAge=2592000)](https://github.com/bytebeats/OkHttpAnalyzer/network/)
-[![GitHub stars](https://img.shields.io/github/stars/bytebeats/OkHttpAnalyzer.svg?style=social&label=Star&maxAge=2592000)](https://github.com/bytebeats/OkHttpAnalyzer/stargazers/)
-[![GitHub watchers](https://img.shields.io/github/watchers/bytebeats/OkHttpAnalyzer.svg?style=social&label=Watch&maxAge=2592000)](https://github.com/bytebeats/OkHttpAnalyzer/watchers/)
+[![GitHub latest commit](https://badgen.net/github/last-commit/bytebeats/okhttp-analyzer-interceptor)](https://github.com/bytebeats/okhttp-analyzer-interceptor/commit/)
+[![GitHub contributors](https://img.shields.io/github/contributors/bytebeats/okhttp-analyzer-interceptor.svg)](https://github.com/bytebeats/okhttp-analyzer-interceptor/graphs/contributors/)
+[![GitHub issues](https://img.shields.io/github/issues/bytebeats/okhttp-analyzer-interceptor.svg)](https://github.com/bytebeats/okhttp-analyzer-interceptor/issues/)
+[![Open Source? Yes!](https://badgen.net/badge/Open%20Source%20%3F/Yes%21/blue?icon=github)](https://github.com/bytebeats/okhttp-analyzer-interceptor/)
+[![GitHub forks](https://img.shields.io/github/forks/bytebeats/okhttp-analyzer-interceptor.svg?style=social&label=Fork&maxAge=2592000)](https://github.com/bytebeats/okhttp-analyzer-interceptor/network/)
+[![GitHub stars](https://img.shields.io/github/stars/bytebeats/okhttp-analyzer-interceptor.svg?style=social&label=Star&maxAge=2592000)](https://github.com/bytebeats/okhttp-analyzer-interceptor/stargazers/)
+[![GitHub watchers](https://img.shields.io/github/watchers/bytebeats/okhttp-analyzer-interceptor.svg?style=social&label=Watch&maxAge=2592000)](https://github.com/bytebeats/okhttp-analyzer-interceptor/watchers/)
 
 An intellij platform plugin. To analyze details of requests and responses from OkHttp.
 
-## Tech stack and whys
+## Tech stack and why
 * [Kotlin](https://kotlinlang.org/) - Kotlin on Android is a “first-class” language and it has [a lot of benefits](https://developer.android.com/kotlin).
 * [MVVM & MVI Architecture](https://developer.android.com/jetpack/guide) - Modern, maintainable, and Google suggested app architecture.
 * [Coroutine](https://developer.android.com/kotlin/coroutines) + [Flow](https://developer.android.com/kotlin/flow) = [MVI](https://github.com/Kotlin-Android-Open-Source/MVI-Coroutines-Flow)
@@ -70,15 +70,15 @@ An intellij platform plugin. To analyze details of requests and responses from O
 
 ## Stargazers over time
 
-[![Stargazers over time](https://starchart.cc/bytebeats/OkHttpAnalyzer.svg)](https://starchart.cc/bytebeats/OkHttpAnalyzer)
+[![Stargazers over time](https://starchart.cc/bytebeats/okhttp-analyzer-interceptor.svg)](https://starchart.cc/bytebeats/okhttp-analyzer-interceptor)
 
 ## Github Stars Sparklines
 
-[![Sparkline](https://stars.medv.io/bytebeats/OkHttpAnalyzer.svg)](https://stars.medv.io/bytebeats/OkHttpAnalyzer)
+[![Sparkline](https://stars.medv.io/bytebeats/okhttp-analyzer-interceptor.svg)](https://stars.medv.io/bytebeats/okhttp-analyzer-interceptor)
 
 ## Contributors
 
-[![Contributors over time](https://contributor-graph-api.apiseven.com/contributors-svg?chart=contributorOverTime&repo=bytebeats/OkHttpAnalyzer)](https://www.apiseven.com/en/contributor-graph?chart=contributorOverTime&repo=bytebeats/OkHttpAnalyzer)
+[![Contributors over time](https://contributor-graph-api.apiseven.com/contributors-svg?chart=contributorOverTime&repo=bytebeats/okhttp-analyzer-interceptor)](https://www.apiseven.com/en/contributor-graph?chart=contributorOverTime&repo=bytebeats/okhttp-analyzer-interceptor)
 
 ## MIT License
 

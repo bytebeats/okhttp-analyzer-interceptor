@@ -28,8 +28,9 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+    namespace 'me.bytebeats.analyzer'
 }
 
 dependencies {
-    implementation 'com.squareup.okhttp3:okhttp:4.9.1'
+    implementation 'com.squareup.okhttp3:okhttp:4.9.3'
 }

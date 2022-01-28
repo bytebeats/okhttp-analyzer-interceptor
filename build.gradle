@@ -19,3 +19,18 @@ buildscript {
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
+
+ext {
+    GROUP_ID = 'io.github.bytebeats'
+    DEVELOPER_ID = 'bytebeats'
+    DEVELOPER_NAME = 'Chen Pan'
+    DEVELOPER_EMAIL = 'happychinapc@gmail.com'
+    SCM_CONNECTION = 'scm:git:github.com/bytebeats/okhttp-analyzer-interceptor.git'
+    SCM_DEVELOPER_CONNECTION = 'scm:git:ssh:github.com/bytebeats/okhttp-analyzer-interceptor.git'
+    SCM_URL = 'https://github.com/bytebeats/okhttp-analyzer-interceptor/tree/master'
+    LICENSE_NAME = 'The Apache License, Version 2.0'
+    LICENSE_URL = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+    POM_URL = 'https://github.com/bytebeats/okhttp-analyzer-interceptor'
+    RELEASES_REPO_URL = 'https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/'
+    SNAPSHOTS_REPO_URL = 'https://s01.oss.sonatype.org/content/repositories/snapshots/'
+}

@@ -3,6 +3,14 @@ plugins {
     id 'kotlin-android'
 }
 
+ext {
+    OKHTTP_ANALYZER_INTERCEPTOR_ARTIFACT_ID = 'okhttp-analyzer-interceptor'
+    OKHTTP_ANALYZER_INTERCEPTOR_VERSION = '0.1.0-4'//-n means major version of okhttp3
+    OKHTTP_ANALYZER_INTERCEPTOR_POM_DESCRIPTION = 'okhttp-analyzer-interceptor: Android part of the Android Studio(Intellij IDEA) OkHttp Analyzer plugin which would analyze details of requests and responses from OkHttpClient.'
+}
+
+apply from: 'publishing_interceptor.gradle'
+
 android {
     compileSdk 31
     buildToolsVersion "31.0.0"

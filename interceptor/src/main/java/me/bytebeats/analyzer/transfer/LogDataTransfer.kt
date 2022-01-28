@@ -24,7 +24,7 @@ class LogDataTransfer : IDataTransfer {
     private lateinit var mLogHandler: LogDataHandler
 
     init {
-        object : HandlerThread("OkHttpAnalyzor", Process.THREAD_PRIORITY_BACKGROUND) {
+        object : HandlerThread("OkHttpAnalyzer", Process.THREAD_PRIORITY_BACKGROUND) {
             override fun onLooperPrepared() {
                 super.onLooperPrepared()
                 mLogHandler = LogDataHandler(looper)
@@ -48,7 +48,7 @@ class LogDataTransfer : IDataTransfer {
                 fastLog(
                     id,
                     MessageType.REQ_HEADER,
-                    "${IDataTransfer.CONTENT_TYPE}${IDataTransfer.HEADER_DELIMITER}${IDataTransfer.SPACE}$type"
+                    "${CONTENT_TYPE}${HEADER_DELIMITER}${SPACE}$type"
                 )
             }
             val contentLength = it.contentLength()
@@ -56,23 +56,18 @@ class LogDataTransfer : IDataTransfer {
                 fastLog(
                     id,
                     MessageType.REQ_HEADER,
-                    "${IDataTransfer.CONTENT_TYPE}${IDataTransfer.HEADER_DELIMITER}${IDataTransfer.SPACE}$contentLength"
+                    "${CONTENT_LENGTH}${HEADER_DELIMITER}${SPACE}$contentLength"
                 )
             }
         }
         val headers = request.headers
         for (name in headers.names()) {
-            if (name.equals(
-                    IDataTransfer.CONTENT_TYPE,
-                    false
-                ) || name.equals(IDataTransfer.CONTENT_LENGTH, false)
-            ) {
+            if (name == CONTENT_TYPE || name == CONTENT_LENGTH) {
                 continue
             }
             fastLog(
-                id,
-                MessageType.REQ_HEADER,
-                "$name${IDataTransfer.HEADER_DELIMITER}${headers[name]}"
+                id, MessageType.REQ_HEADER,
+                "$name${HEADER_DELIMITER}${SPACE}${headers[name]}"
             )
         }
         reqBody?.let {
@@ -83,7 +78,7 @@ class LogDataTransfer : IDataTransfer {
 
     @Throws(IOException::class)
     override fun transferResponse(id: String, response: Response) {
-        val respBodyCopy = response.peekBody(IDataTransfer.BODY_BUFFER_SIZE)
+        val respBodyCopy = response.peekBody(BODY_BUFFER_SIZE)
         largeLog(id, MessageType.RESP_BODY, respBodyCopy.string())
 
         val headers = response.headers
@@ -92,7 +87,7 @@ class LogDataTransfer : IDataTransfer {
             logWithHandler(
                 id,
                 MessageType.RESP_HEADER,
-                "$name${IDataTransfer.HEADER_DELIMITER}${headers[name]}",
+                "$name${HEADER_DELIMITER}${headers[name]}",
                 0
             )
         }
@@ -117,20 +112,20 @@ class LogDataTransfer : IDataTransfer {
         if (!::mLogHandler.isInitialized) return
         val msg = mLogHandler.obtainMessage()
         val data = Bundle()
-        data.putString(IDataTransfer.KEY_TAG, logTag(id, type))
-        data.putString(IDataTransfer.KEY_VALUE, message)
-        data.putInt(IDataTransfer.KEY_PARTS_COUNT, parts)
+        data.putString(KEY_TAG, logTag(id, type))
+        data.putString(KEY_VALUE, message)
+        data.putInt(KEY_PARTS_COUNT, parts)
         msg.data = data
         mLogHandler.sendMessage(msg)
     }
 
     private fun largeLog(id: String, type: MessageType, content: String) {
         val length = content.length
-        if (length > IDataTransfer.LOG_LENGTH) {
-            val parts = length / IDataTransfer.LOG_LENGTH
+        if (length > LOG_LENGTH) {
+            val parts = length / LOG_LENGTH
             for (i in 0..parts) {
-                val start = i * IDataTransfer.LOG_LENGTH
-                var end = start + IDataTransfer.LOG_LENGTH
+                val start = i * LOG_LENGTH
+                var end = start + LOG_LENGTH
                 if (end > length) {
                     end = length
                 }
@@ -142,6 +137,6 @@ class LogDataTransfer : IDataTransfer {
     }
 
     private fun logTag(id: String, type: MessageType): String {
-        return "${IDataTransfer.LOG_PREFIX}${IDataTransfer.DELIMITER}${id}${IDataTransfer.DELIMITER}${type.`val`}"
+        return "${LOG_PREFIX}${DELIMITER}${id}${DELIMITER}${type.`val`}"
     }
 }

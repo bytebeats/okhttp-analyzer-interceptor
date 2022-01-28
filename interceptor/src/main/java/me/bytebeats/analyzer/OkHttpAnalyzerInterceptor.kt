@@ -4,8 +4,7 @@ import me.bytebeats.analyzer.transfer.LogDataTransfer
 import okhttp3.Interceptor
 import okhttp3.Response
 import java.text.SimpleDateFormat
-import java.util.Date
-import java.util.Locale
+import java.util.*
 import java.util.concurrent.atomic.AtomicLong
 
 /**
@@ -46,7 +45,7 @@ class OkHttpAnalyzerInterceptor : Interceptor {
     private fun id(): String {
         var curTime = mDateFormat.format(Date()).toLong()
         var preTime = mPreTime.get()
-        if (curTime < preTime) {
+        if (curTime <= preTime) {
             curTime = ++preTime
         }
         mPreTime.set(curTime)

@@ -16,16 +16,16 @@ import android.util.Log
 class LogDataHandler(looper: Looper) : Handler(looper) {
     override fun handleMessage(msg: Message) {
         val data = msg.data
-        val parts = data.getInt(IDataTransfer.KEY_PARTS_COUNT, 0)
-        if (parts > IDataTransfer.SLOW_DOWN_PARTS_AFTER) {
+        val parts = data.getInt(KEY_PARTS_COUNT, 0)
+        if (parts > SLOW_DOWN_PARTS_AFTER) {
             try {
                 Thread.sleep(5L)
             } catch (e: InterruptedException) {
                 e.printStackTrace()
             }
         }
-        val `val` = data.getString(IDataTransfer.KEY_VALUE)
-        val tag = data.getString(IDataTransfer.KEY_TAG)
+        val `val` = data.getString(KEY_VALUE)
+        val tag = data.getString(KEY_TAG)
         if (!`val`.isNullOrEmpty() && !tag.isNullOrEmpty()) {
             Log.v(tag, `val`)
         }

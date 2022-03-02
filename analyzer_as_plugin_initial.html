@@ -17,7 +17,7 @@
 <h1>OkHttpAnalyzer Plugin</h1>
 <h2><a href="https://www.buymeacoffee.com/bytebeats">Buy me a cup of Coffee, no, Tea!</a></h2>
 <h2>
-    Any data from your android device won't be received. You can make sure that in your Logcat Window.
+    No data from your android device will be stored. You can make sure that in Android Studio Logcat Window.
 </h2>
 <p>OkHttp Analyzer plugin can show request from okhttp library directly in your Android Studio tool window.
     It supports okhttp v3 (<a href="http://square.github.io/okhttp/" rel="nofollow">http://square.github.io/okhttp/</a>)
@@ -25,7 +25,16 @@
 </p>
 <hr>
 <h2>For installation you need to include library to your app build.gradle file</h2>
-<div class="code">implementation 'io.github.bytebeats:okhttp-analyzer-interceptor:0.1.0'</div>
+<h3>Maven Support in root build.gradle</h3>
+<div class="code">
+    repositories {<br/>
+    maven { url('https://repo1.maven.org/maven2/') }<br/>
+    ...<br/>
+    }<br/>
+</div>
+<h3>Add Dependency in module build.gradle</h3>
+<div class="code">implementation 'io.github.bytebeats:okhttp-analyzer-interceptor:<a href="https://github.com/bytebeats/okhttp-analyzer-interceptor/blob/master/README.md" rel="nofollow">$LATEST_VERSION'</a></div>
+<p>Note: -n means major okhttp3 versions. Like 4 means 4.19.7; 3 means 3.14.9</p>
 <p>and add Interceptor to OkHttpClient in code</p>
 <h2>For OkHttp</h2>
 <h3>Java</h3>

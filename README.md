@@ -22,6 +22,29 @@ An intellij platform plugin. To analyze details of requests and responses from O
 ## How to use
 
 ##### For OkHttp
+
+###### Dependencies
+
+1. add maven url in your root `build.gradle`:
+```
+    repositories {
+       maven { url('https://repo1.maven.org/maven2/') }
+               ...
+    }
+```
+
+2. add dependency in your module `build.gradle`
+```
+dependencies {
+    implementation "androidx.compose.ui:ui:$compose_version"
+
+//    implementation project(':interceptors')
+    implementation('io.github.bytebeats:okhttp-analyzer-interceptor:$LATEST_VERSION')//-n means okhttp major version. like 4 means 4.9.3, 3 means 3.14.9
+}
+```
+
+Note: **`LATEST_VERSION`** : 0.1.3-4
+
 ###### Java
 ```
     OkHttpClient.Builder builder = new OkHttpClient.Builder();

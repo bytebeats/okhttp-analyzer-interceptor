@@ -38,13 +38,13 @@ class LogDataTransfer constructor(
 
     @Throws(IOException::class)
     override fun transferRequest(id: String, request: Request) {
-        fastLog(id, MessageType.REQ_METHOD, request.method)
-        val url = request.url.toString()
+        fastLog(id, MessageType.REQ_METHOD, request.method())
+        val url = request.url().toString()
         fastLog(id, MessageType.REQ_URL, url)
         fastLog(id, MessageType.REQ_TIME, System.currentTimeMillis().toString())
         val reqCopy = request.newBuilder().build()
         val buffer = Buffer()
-        val reqBody = reqCopy.body
+        val reqBody = reqCopy.body()
         reqBody?.let {
             val mediaType = it.contentType()
             mediaType?.let { type ->
@@ -63,7 +63,7 @@ class LogDataTransfer constructor(
                 )
             }
         }
-        val headers = request.headers
+        val headers = request.headers()
         for (name in headers.names()) {
             if (name == CONTENT_TYPE || name == CONTENT_LENGTH) {
                 continue
@@ -102,8 +102,8 @@ class LogDataTransfer constructor(
             )
         }
 
-        val headers = response.headers
-        logWithHandler(id, MessageType.RESP_STATUS, response.code.toString(), 0)
+        val headers = response.headers()
+        logWithHandler(id, MessageType.RESP_STATUS, response.code().toString(), 0)
         for (name in headers.names()) {
             logWithHandler(
                 id,

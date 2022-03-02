@@ -5,7 +5,7 @@ plugins {
 
 ext {
     OKHTTP_ANALYZER_INTERCEPTOR_ARTIFACT_ID = 'okhttp-analyzer-interceptor'
-    OKHTTP_ANALYZER_INTERCEPTOR_VERSION = '0.1.2-3'//-n means major version of okhttp3
+    OKHTTP_ANALYZER_INTERCEPTOR_VERSION = '0.1.4-3'//-n means major version of okhttp3
     OKHTTP_ANALYZER_INTERCEPTOR_POM_DESCRIPTION = 'okhttp-analyzer-interceptor: Android part of the Android Studio(Intellij IDEA) OkHttp Analyzer plugin which would analyze details of requests and responses from OkHttpClient.'
 }
 
@@ -17,7 +17,7 @@ android {
 
     defaultConfig {
         minSdk 19
-        targetSdk 31
+        targetSdk 30
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"

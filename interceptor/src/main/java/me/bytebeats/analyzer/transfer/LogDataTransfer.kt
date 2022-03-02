@@ -5,6 +5,7 @@ import android.os.HandlerThread
 import android.os.Process
 import android.util.Log
 import me.bytebeats.analyzer.MessageType
+import me.bytebeats.analyzer.copy
 import okhttp3.Request
 import okhttp3.Response
 import okio.Buffer
@@ -21,8 +22,7 @@ import java.nio.charset.Charset
  * Transfer okhttp data into verbose logs of Android platform
  */
 class LogDataTransfer constructor(
-    private val omitCallWhen: () -> Boolean,
-    private val maxBufferSize: Long
+    private val maxBytesToIntercept: Long
 ) : IDataTransfer {
     private lateinit var mLogHandler: LogDataHandler
 
@@ -74,15 +74,33 @@ class LogDataTransfer constructor(
             )
         }
         reqBody?.let {
-            it.writeTo(buffer)
-            largeLog(id, MessageType.REQ_BODY, buffer.readString(Charset.defaultCharset()))
+            val cl = it.contentLength()
+            if (cl <= maxBytesToIntercept) {
+                it.writeTo(buffer)
+                largeLog(id, MessageType.REQ_BODY, buffer.readString(Charset.defaultCharset()))
+            } else {
+                fastLog(
+                    id,
+                    MessageType.REQ_BODY,
+                    "The request body is hidden because content length($cl) exceeds maxBytesToIntercept($maxBytesToIntercept)"
+                )
+            }
         }
     }
 
     @Throws(IOException::class)
     override fun transferResponse(id: String, response: Response) {
-        val respBodyCopy = response.peekBody(BODY_BUFFER_SIZE)
-        largeLog(id, MessageType.RESP_BODY, respBodyCopy.string())
+        val respBodyCopy = response.copy()
+        val cl = respBodyCopy.contentLength()
+        if (cl <= maxBytesToIntercept) {
+            largeLog(id, MessageType.RESP_BODY, respBodyCopy.string())
+        } else {
+            fastLog(
+                id,
+                MessageType.RESP_BODY,
+                "The response body is hidden because content length($cl) exceeds maxBytesToIntercept($maxBytesToIntercept)"
+            )
+        }
 
         val headers = response.headers
         logWithHandler(id, MessageType.RESP_STATUS, response.code.toString(), 0)

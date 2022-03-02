@@ -9,7 +9,7 @@ import java.io.IOException
  * E-mail: happychinapc@gmail.com
  * Quote: Peasant. Educated. Worker
  */
-const val LOG_LENGTH = 4000
+const val LOG_LENGTH = 4000 // 4096 is the limit for Android Studio Logcat Window.
 internal const val SLOW_DOWN_PARTS_AFTER = 20
 internal const val BODY_BUFFER_SIZE = 1024L * 1024L * 10L
 internal const val LOG_PREFIX = "OkHttpAnalyzer"

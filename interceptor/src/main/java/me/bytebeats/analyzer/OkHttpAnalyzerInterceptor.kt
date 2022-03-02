@@ -17,10 +17,10 @@ import java.util.concurrent.atomic.AtomicLong
  * An OkHttp Interceptor to intercept requests and responses
  */
 class OkHttpAnalyzerInterceptor @JvmOverloads constructor(
-    private val omitCallWhen: () -> Boolean = { false },
-    private val maxBufferSize: Long = BODY_BUFFER_SIZE
+    private val shouldIntercept: () -> Boolean = { true },
+    private val maxBytesToIntercept: Long = BODY_BUFFER_SIZE
 ) : Interceptor {
-    private val mDataTransfer by lazy { LogDataTransfer(omitCallWhen, maxBufferSize) }
+    private val mDataTransfer by lazy { LogDataTransfer(maxBytesToIntercept) }
     private val mPreTime by lazy { AtomicLong() }
     private val mDateFormat by lazy { SimpleDateFormat("ddhhmmssSSS", Locale.US) }
 
@@ -28,16 +28,18 @@ class OkHttpAnalyzerInterceptor @JvmOverloads constructor(
         val id = id()
         val startTime = System.currentTimeMillis()
         val request = chain.request()
-        if (!omitCallWhen()) {
+        if (shouldIntercept()) {
             mDataTransfer.transferRequest(id, request)
         }
         val response = chain.proceed(request)
-        try {
-            mDataTransfer.transferResponse(id, response)
-            mDataTransfer.transferDuration(id, System.currentTimeMillis() - startTime)
-        } catch (e: Exception) {
-            mDataTransfer.transferThrowable(id, e)
-            mDataTransfer.transferDuration(id, System.currentTimeMillis() - startTime)
+        if (shouldIntercept()) {
+            try {
+                mDataTransfer.transferResponse(id, response)
+                mDataTransfer.transferDuration(id, System.currentTimeMillis() - startTime)
+            } catch (e: Exception) {
+                mDataTransfer.transferThrowable(id, e)
+                mDataTransfer.transferDuration(id, System.currentTimeMillis() - startTime)
+            }
         }
         return response
     }

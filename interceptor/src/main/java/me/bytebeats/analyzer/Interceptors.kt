@@ -11,6 +11,6 @@ import okhttp3.ResponseBody
 
 fun Response.copy(): ResponseBody {
     val body = this.body()!!
-    val buffer = body.source().buffer.clone()
+    val buffer = body.source().buffer().clone()
     return ResponseBody.create(body.contentType(), body.contentLength(), buffer)
 }

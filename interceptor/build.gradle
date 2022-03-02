@@ -5,7 +5,7 @@ plugins {
 
 ext {
     OKHTTP_ANALYZER_INTERCEPTOR_ARTIFACT_ID = 'okhttp-analyzer-interceptor'
-    OKHTTP_ANALYZER_INTERCEPTOR_VERSION = '0.1.1-4'//-n means major version of okhttp3
+    OKHTTP_ANALYZER_INTERCEPTOR_VERSION = '0.1.3-4'//-n means major version of okhttp3
     OKHTTP_ANALYZER_INTERCEPTOR_POM_DESCRIPTION = 'okhttp-analyzer-interceptor: Android part of the Android Studio(Intellij IDEA) OkHttp Analyzer plugin which would analyze details of requests and responses from OkHttpClient.'
 }
 

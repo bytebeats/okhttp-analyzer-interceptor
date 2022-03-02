@@ -1,5 +1,6 @@
 package me.bytebeats.analyzer
 
+import me.bytebeats.analyzer.transfer.BODY_BUFFER_SIZE
 import me.bytebeats.analyzer.transfer.LogDataTransfer
 import okhttp3.Interceptor
 import okhttp3.Response
@@ -15,25 +16,30 @@ import java.util.concurrent.atomic.AtomicLong
 /**
  * An OkHttp Interceptor to intercept requests and responses
  */
-class OkHttpAnalyzerInterceptor : Interceptor {
-    private val mDataTransfer by lazy { LogDataTransfer() }
+class OkHttpAnalyzerInterceptor @JvmOverloads constructor(
+    private val omitCallWhen: () -> Boolean = { false },
+    private val maxBufferSize: Long = BODY_BUFFER_SIZE
+) : Interceptor {
+    private val mDataTransfer by lazy { LogDataTransfer(omitCallWhen, maxBufferSize) }
     private val mPreTime by lazy { AtomicLong() }
     private val mDateFormat by lazy { SimpleDateFormat("ddhhmmssSSS", Locale.US) }
 
     override fun intercept(chain: Interceptor.Chain): Response {
         val id = id()
         val startTime = System.currentTimeMillis()
-        mDataTransfer.transferRequest(id, chain.request())
+        val request = chain.request()
+        if (!omitCallWhen()) {
+            mDataTransfer.transferRequest(id, request)
+        }
+        val response = chain.proceed(request)
         try {
-            val response = chain.proceed(chain.request())
             mDataTransfer.transferResponse(id, response)
             mDataTransfer.transferDuration(id, System.currentTimeMillis() - startTime)
-            return response
         } catch (e: Exception) {
             mDataTransfer.transferThrowable(id, e)
             mDataTransfer.transferDuration(id, System.currentTimeMillis() - startTime)
-            throw e
         }
+        return response
     }
 
     /**

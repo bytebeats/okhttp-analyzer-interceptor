@@ -20,7 +20,10 @@ import java.nio.charset.Charset
 /**
  * Transfer okhttp data into verbose logs of Android platform
  */
-class LogDataTransfer : IDataTransfer {
+class LogDataTransfer constructor(
+    private val omitCallWhen: () -> Boolean,
+    private val maxBufferSize: Long
+) : IDataTransfer {
     private lateinit var mLogHandler: LogDataHandler
 
     init {

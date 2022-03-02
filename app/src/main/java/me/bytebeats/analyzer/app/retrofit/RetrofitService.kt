@@ -1,5 +1,6 @@
 package me.bytebeats.analyzer.app.retrofit
 
+import com.localebro.okhttpprofiler.OkHttpProfilerInterceptor
 import com.squareup.moshi.Moshi
 import me.bytebeats.analyzer.OkHttpAnalyzerInterceptor
 import me.bytebeats.analyzer.app.service.ApiService
@@ -21,6 +22,7 @@ object RetrofitService {
             .client(
                 OkHttpClient.Builder()
                     .addInterceptor(OkHttpAnalyzerInterceptor())
+                    .addInterceptor(OkHttpProfilerInterceptor())
                     .addInterceptor(HttpLoggingInterceptor().apply {
                         level = HttpLoggingInterceptor.Level.BODY
                     })
